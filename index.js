@@ -7,10 +7,10 @@ const Models = require('./models.js');
 const passport = require('passport');
 require('./passport');
 const cors = require('cors');
-app.use(cors());
 const { check, validationResult } = require('express-validator');
 
 const app = express();
+app.use(cors());
 app.use(bodyParser.json());
 
 const Movies = Models.Movie;
