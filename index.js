@@ -32,6 +32,60 @@ app.get('/movies', (req, res) => {
   res.json(topMovies);
 });
 
+app.get('/movies/:title', (req, res) => {
+  res.json(topMovies.find((topMovies) => {
+    return topMovies.title === req.params.title
+  }));
+});
+
+app.get('/movies/genres/:genre', (req, res) => {
+  res.send('Here comes the genres');
+});
+
+app.get('/movies/directors/:name', (req, res) => {
+  res.send('Here comes the directors');
+});
+
+app.post('/users', (req, res) => {
+  res.send('Your registration was successful!');
+});
+
+app.put('/users/:username', (req, res) => {
+  res.send(req.params.username + 'Your profile update was successful!');
+});
+
+app.post('/users/:username/favorites', (req, res) => {
+  res.send(req.params.title + ' was successfully added to your favorites!');
+});
+
+app.delete('/users/:username/favorites/:title', (req, res) => {
+  res.send(req.params.title + ' was successfully removed from your favorites!');
+});
+
+app.delete('/users/:username', (req, res) => {
+  res.send('You successfully deleted your account!');
+});
+
+app.get('/actors', (req, res) => {
+  res.send('Here comes the actors');
+});
+
+app.get('/actors/:name', (req, res) => {
+  res.send('Here comes the details about one actor');
+});
+
+app.get('/movies/:title', (req, res) => {
+  res.send('More info on the movie');
+});
+
+app.post('/users/:username/favorites/watchlist', (req, res) => {
+  res.send(req.params.title + ' was successfully added to your watchlist!');
+});
+
+app.delete('/users/:username/favorites/watchlist/:title', (req, res) => {
+  res.send(req.params.title + ' was successfully removed from your watchlist!');
+});
+
 // Set static file
 app.use(express.static('public'));
 
