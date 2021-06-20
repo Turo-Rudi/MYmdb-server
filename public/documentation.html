@@ -97,8 +97,8 @@
       </tr>
       <tr>
         <td>Return data about a genre by name/title</td>
-        <td>/movies/genres/:genre</td>
-        <td>/movies/genres/[Genre]</td>
+        <td>/genre/:name</td>
+        <td>/genre/[Name]</td>
         <td>GET</td>
         <td>None</td>
         <td>JSON object holding data about all genres<br>
@@ -108,8 +108,8 @@
       </tr>
       <tr>
         <td>Return data about a director by name</td>
-        <td>/movies/directors/:name</td>
-        <td>/movies/directors/[Name]</td>
+        <td>/director/:name</td>
+        <td>/director/[Name]</td>
         <td>GET</td>
         <td>None</td>
         <td>JSON object holding data about all directors<br>
@@ -135,7 +135,7 @@
       <tr>
         <td>Allow users to update their user info</td>
         <td>/users/:username</td>
-        <td>/users/[Name]</td>
+        <td>/users/[Username]</td>
         <td>PUT</td>
         <td>JSON object holding data about the users update<br>
           E.g. <br>{'Name': 'Jane Doe'}<br></td>
@@ -144,8 +144,8 @@
       </tr>
       <tr>
         <td>Allow users to add a movie to their list of favorites</td>
-        <td>/users/:username/favorites</td>
-        <td>/users/[Name]/favorites</td>
+        <td>/users/:username/Movies/:movieID</td>
+        <td>/users/[Username]/Movies/[MovieID]</td>
         <td>POST</td>
         <td>A JSON Object holding data about the movies to add to the favorites list<br>
           E.g. <br>{'FavMovie': 'Inception'}<br></td>
@@ -154,8 +154,8 @@
       </tr>
       <tr>
         <td>Allow users to remove a movie from their list of favorites</td>
-        <td>/users/:username/favorites/:title</td>
-        <td>/users/[Name]/favorites/[Title]</td>
+        <td>/users/:username/Movies/:title</td>
+        <td>/users/[Username]/Movies/[Title]</td>
         <td>DELETE</td>
         <td>None</td>
         <td>A text message indicating whether the movies was successfully removed from favorites</td>
@@ -163,7 +163,7 @@
       <tr>
         <td>Allow existing users to deregister</td>
         <td>/users/:username</td>
-        <td>/users/[Name]</td>
+        <td>/users/[Username]</td>
         <td>DELETE</td>
         <td>None</td>
         <td>A text message indicating whether the account has been deleted</td>
@@ -195,7 +195,7 @@
       <tr>
         <td>Allow users to create a “To Watch” list in addition to their “Favorite Movies” list</td>
         <td>/users/:username/favorites/watchlist</td>
-        <td>/users/[Name]/favorites/watchlist</td>
+        <td>/users/[Username]/favorites/watchlist</td>
         <td>POST</td>
         <td>JSON object holding "To Watch" movie data</td>
         <td>JSON object holding data that was added to the "To Watch" list</td>
@@ -203,7 +203,7 @@
       <tr>
         <td>Allow users to delete a movie from the “To Watch” list</td>
         <td>/users/:username/favorites/watchlist/:title</td>
-        <td>/users/[Name]/favorites/watchlist/[Title]</td>
+        <td>/users/[Username]/favorites/watchlist/[Title]</td>
         <td>DELETE</td>
         <td>JSON object holding "To Watch" movie data</td>
         <td>JSON object holding data that was added to the "To Watch" list</td>
