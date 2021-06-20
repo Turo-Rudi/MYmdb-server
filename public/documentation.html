@@ -3,16 +3,213 @@
 
 <head>
   <meta charset="utf-8">
-  <title>MyFlix Documentation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=KoHo:wght@400;700&display=swap" rel="stylesheet">
+  <title>MYmdb Documentation</title>
+
+  <style>
+    * {
+      font-family: 'KoHo', sans-serif;
+    }
+
+    body {
+      box-sizing: border-box;
+      margin: 50px;
+    }
+
+    h1 {
+      text-transform: uppercase;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      text-transform: uppercase;
+      background-color: #188936;
+      color: white;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      border: 1px solid black;
+    }
+
+    tr:hover {
+      background-color: #f5f5f5;
+    }
+  </style>
 </head>
 
 <body>
-  <h1>Objective</h1>
-  <p>To build the server-side component of a “movies” web application. <br>
-    The web application will provide users with access to information about different movies, directors, and genres.
-    <br>
-    Users will be able to sign up, update their personal information, and create a list of their favorite movies.<br>
-    The complete tech stack used is MERN (MongoDB, Express, React, and Node.js) stack.</p>
+  <main>
+    <h1>Objective</h1>
+    <p>To build the server-side component of a “movies” web application. <br>
+      The web application will provide users with access to information about different movies, directors, and genres.
+      <br>
+      Users will be able to sign up, update their- personal information, and create a list of their favorite movies.<br>
+      The complete tech stack used is MERN (MongoDB, Express, React, and Node.js) stack.
+    </p>
+    <h1>Stack and dependencies</h1>
+    <p><strong>Stack: </strong>MongoDB, Express, React, and Node.js<br>
+      <strong>Dependencies: </strong>express, morgan, body-parser
+    </p>
+  </main>
+  <h1>Essential Features</h1>
+  <table class="">
+    <thead>
+      <tr>
+        <th>Request</th>
+        <th>Query parameter</th>
+        <th>URL</th>
+        <th>HTTP Method</th>
+        <th>Request body data format</th>
+        <th>Response body data format</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Return a list of ALL movies to the user</td>
+        <td>/movies</td>
+        <td>/movies</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>JSON object holding data about all the movies</td>
+      </tr>
+      <tr>
+        <td>Return data about a single movie by title to the user</td>
+        <td>/movies/:title</td>
+        <td>/movies/[Title]</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>JSON object holding data about a single movie by title.<br>
+          E.g. <br>{'Title': '12 Angry Man',<br>
+          'Description': 'The film tells the story of a jury of 12 men',<br>
+          'Genre': 'Drama',<br>
+          'Director': 'Sidney Lumet',<br>
+          'Image URL': 'shorturl.at/kuF57',<br>
+          'Featured': 'True'
+          }</td>
+      </tr>
+      <tr>
+        <td>Return data about a genre by name/title</td>
+        <td>/movies/genres/:genre</td>
+        <td>/movies/genres/[Genre]</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>JSON object holding data about all genres<br>
+          E.g. <br>{'Genre': 'Drama',<br>
+          'Description': 'Drama is a category of narrative fiction (or semi-fiction) intended to be more serious than
+          humorous in tone.'}<br></td>
+      </tr>
+      <tr>
+        <td>Return data about a director by name</td>
+        <td>/movies/directors/:name</td>
+        <td>/movies/directors/[Name]</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>JSON object holding data about all directors<br>
+          E.g. <br>{'Name': 'Martin Scorsese',<br>
+          'Birthday': '1942-11-17',<br>
+          'Nationality': 'american, italian'}<br></td>
+      </tr>
+      <tr>
+        <td>Allow new users to register</td>
+        <td>/users</td>
+        <td>/users</td>
+        <td>POST</td>
+        <td>A JSON object holding data about the user to register<br>
+          E.g. <br>{'Name': 'John Doe',<br>
+          'Birthday': '1995-12-05',<br>
+          'Email': 'john.doe@gmail.com'}<br></td>
+        <td>A JSON object holding data about the user that was registered<br>
+          E.g. <br>{'ID': '123456',<br>
+          'Name': 'John Doe',<br>
+          'Birthday': '1995-12-05',<br>
+          'Email': 'john.doe@gmail.com'}</td>
+      </tr>
+      <tr>
+        <td>Allow users to update their user info</td>
+        <td>/users/:username</td>
+        <td>/users/[Name]</td>
+        <td>PUT</td>
+        <td>JSON object holding data about the users update<br>
+          E.g. <br>{'Name': 'Jane Doe'}<br></td>
+        <td>A text message indicating the info that was updated<br>
+          E.g. <br>{'Name': 'Jane Doe'}<br></td>
+      </tr>
+      <tr>
+        <td>Allow users to add a movie to their list of favorites</td>
+        <td>/users/:username/favorites</td>
+        <td>/users/[Name]/favorites</td>
+        <td>POST</td>
+        <td>A JSON Object holding data about the movies to add to the favorites list<br>
+          E.g. <br>{'FavMovie': 'Inception'}<br></td>
+        <td>A JSON Object holding data about the movies that was added to the favorites list<br>
+          E.g. <br>{'FavMovie': 'Inception'}<br></td>
+      </tr>
+      <tr>
+        <td>Allow users to remove a movie from their list of favorites</td>
+        <td>/users/:username/favorites/:title</td>
+        <td>/users/[Name]/favorites/[Title]</td>
+        <td>DELETE</td>
+        <td>None</td>
+        <td>A text message indicating whether the movies was successfully removed from favorites</td>
+      </tr>
+      <tr>
+        <td>Allow existing users to deregister</td>
+        <td>/users/:username</td>
+        <td>/users/[Name]</td>
+        <td>DELETE</td>
+        <td>None</td>
+        <td>A text message indicating whether the account has been deleted</td>
+      </tr>
+      <tr>
+        <td>Allow users to see which actors star in which movies</td>
+        <td>/actors</td>
+        <td>/actors</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>JSON object holding data about all actors</td>
+      </tr>
+      <tr>
+        <td>Allow users to view information about different actors</td>
+        <td>/actors/:name</td>
+        <td>/actors/[Name]</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>JSON object holding details about the chosen actor</td>
+      </tr>
+      <tr>
+        <td>Allow users to view more information about different movies</td>
+        <td>/movies/:title</td>
+        <td>/movies/[Title]</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>JSON object holding details about the chosen movie (release date and movie rating)</td>
+      </tr>
+      <tr>
+        <td>Allow users to create a “To Watch” list in addition to their “Favorite Movies” list</td>
+        <td>/users/:username/favorites/watchlist</td>
+        <td>/users/[Name]/favorites/watchlist</td>
+        <td>POST</td>
+        <td>JSON object holding "To Watch" movie data</td>
+        <td>JSON object holding data that was added to the "To Watch" list</td>
+      </tr>
+      <tr>
+        <td>Allow users to delete a movie from the “To Watch” list</td>
+        <td>/users/:username/favorites/watchlist/:title</td>
+        <td>/users/[Name]/favorites/watchlist/[Title]</td>
+        <td>DELETE</td>
+        <td>JSON object holding "To Watch" movie data</td>
+        <td>JSON object holding data that was added to the "To Watch" list</td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 
 </html>
