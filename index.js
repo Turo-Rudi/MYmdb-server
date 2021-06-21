@@ -11,9 +11,16 @@ const { check, validationResult } = require('express-validator');
 
 const app = express();
 app.use(cors());
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 
-mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+  } catch (error) {
+    console.log(error);
+  }
+}
+connectDB();
 
 const Movies = Models.Movie;
 const Users = Models.User;
