@@ -13,6 +13,8 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+
 const Movies = Models.Movie;
 const Users = Models.User;
 const Actors = Models.Actor;
@@ -23,7 +25,6 @@ let auth = require('./auth')(app);
 
 // DB connection
 //mongoose.connect('mongodb://localhost:27017/MYmdb', { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Logging with Morgan
 app.use(morgan('common'));
