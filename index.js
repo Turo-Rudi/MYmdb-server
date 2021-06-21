@@ -13,14 +13,7 @@ const app = express();
 app.use(cors());
 //app.use(bodyParser.json());
 
-const connectDB = async () => {
-  try {
-    await mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-  } catch (error) {
-    console.log(error);
-  }
-}
-connectDB();
+mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const Movies = Models.Movie;
 const Users = Models.User;
