@@ -13,6 +13,8 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+// DB connection
+//mongoose.connect('mongodb://localhost:27017/MYmdb', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const Movies = Models.Movie;
@@ -23,9 +25,6 @@ const Genres = Models.Genre;
 
 let auth = require('./auth')(app);
 
-// DB connection
-//mongoose.connect('mongodb://localhost:27017/MYmdb', { useNewUrlParser: true, useUnifiedTopology: true });
-
 // Logging with Morgan
 app.use(morgan('common'));
 
@@ -35,7 +34,7 @@ app.get('/', (req, res) => {
 });
 
 //Get all movies
-app.get('/movies', (req, res) => {
+app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find()
     .then((movies) => {
       res.status(200).json(movies);
